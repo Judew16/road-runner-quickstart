@@ -14,10 +14,10 @@ public class servoTest extends LinearOpMode {
 
 
     public void runOpMode() {
-        baseRight = hardwareMap.get(Servo.class, "baseRight");
-        baseLeft = hardwareMap.get(Servo.class, "baseLeft");
-        elbow = hardwareMap.get(Servo.class, "elbow");
-        //baseRight.setDirection(Servo.Direction.REVERSE);
+        baseRight = hardwareMap.get(Servo.class, "baseRight");//port 1
+        baseLeft = hardwareMap.get(Servo.class, "baseLeft");//port 0
+        elbow = hardwareMap.get(Servo.class, "elbow");//port 2
+        baseRight.setDirection(Servo.Direction.REVERSE);
 
         waitForStart();
 
@@ -28,8 +28,15 @@ public class servoTest extends LinearOpMode {
             }
             //open
             if (gamepad1.x) {
-                baseRight.setPosition(0.2);
-                baseLeft.setPosition(0.48);
+                baseRight.setPosition(0.5);
+                baseLeft.setPosition(0.5);
+            }
+            if (gamepad1.a){
+                elbow.setPosition(0); //Expand
+            }
+
+            if (gamepad1.y){
+                elbow.setPosition(0.5); //Fold
             }
         }
 
