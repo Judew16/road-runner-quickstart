@@ -11,6 +11,10 @@ public class servoTest extends LinearOpMode {
     public Servo baseLeft = null;
     public Servo baseRight = null;
     public Servo elbow = null;
+    public Servo base = null;
+
+
+
 
 
     public void runOpMode() {
@@ -19,25 +23,49 @@ public class servoTest extends LinearOpMode {
         elbow = hardwareMap.get(Servo.class, "elbow");//port 2
         baseRight.setDirection(Servo.Direction.REVERSE);
 
+        baseRight = hardwareMap.get(Servo.class, "baseRight");
+        baseLeft = hardwareMap.get(Servo.class, "baseLeft");
+        elbow = hardwareMap.get(Servo.class, "elbow");
+        base = hardwareMap.get(Servo.class, "base");
+        baseRight.setDirection(Servo.Direction.REVERSE);
+        elbow.setDirection(Servo.Direction.REVERSE);
+
+
         waitForStart();
 
         while (opModeIsActive()){
+            double leftHome = baseLeft.getPosition();
+            double rightHome= baseRight.getPosition();
+            double elbowHome = elbow.getPosition();
+
+            double leftHome1 = baseLeft.getPosition();
+            double rightHome1= baseRight.getPosition();
+            double elbowHome1 = elbow.getPosition();
+
+
             if (gamepad1.b) {
-                baseRight.setPosition(0);
-                baseLeft.setPosition(0);
+                baseLeft.setPosition(leftHome);
+                baseRight.setPosition(rightHome);
             }
             //open
             if (gamepad1.x) {
-                baseRight.setPosition(0.5);
-                baseLeft.setPosition(0.5);
-            }
-            if (gamepad1.a){
-                elbow.setPosition(0); //Expand
+                leftHome += 0.5;
+                rightHome += 0.5;
+                baseRight.setPosition(rightHome);
+                baseLeft.setPosition(leftHome);
             }
 
-            if (gamepad1.y){
-                elbow.setPosition(0.5); //Fold
+            if(gamepad1.a){
+                elbow.setPosition(elbowHome);
             }
+
+            if(gamepad1.y){
+                elbowHome += 0.8;
+                elbow.setPosition(elbowHome);
+            }
+
+
+
         }
 
 
