@@ -78,7 +78,7 @@ public class jwTwoDriver extends LinearOpMode {
     private DcMotorEx leftRear = null;
     private DcMotorEx rightFront = null;
     private DcMotorEx rightRear = null;
-    private Servo intakeLeft = null;
+    private Servo intake = null;
     private DcMotor arm = null;
     private List<DcMotorEx> motors;
 
@@ -104,7 +104,7 @@ public class jwTwoDriver extends LinearOpMode {
 
 
         //initialize gripper intake
-        intakeLeft = hardwareMap.get(Servo.class, "intakeLeft");
+        intake = hardwareMap.get(Servo.class, "intakeLeft");
 
 
         //initialize arm
@@ -262,13 +262,10 @@ public class jwTwoDriver extends LinearOpMode {
                 }
             }
             if (gamepad2.left_bumper)
-                intakeLeft.setPosition(0.1);
+                intake.setPosition(0.1);
             if (gamepad2.right_bumper) {
-                intakeLeft.setPosition(1);
+                intake.setPosition(1);
             }
-            if (gamepad2.right_bumper) {
-                intakeLeft.setPosition(1);
-                intakeLeft.setPosition(0.76);
                 // Show the elapsed game time and wheel power.
                 telemetry.addData("Status", "Run Time: " + runtime.toString());
                 armCurrentPosition = arm.getCurrentPosition();
@@ -277,4 +274,4 @@ public class jwTwoDriver extends LinearOpMode {
                 telemetry.update();
             }
         }
-    }}
+    }
